@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Birthday Countdown</title>
     <style>
-         body {
+        body {
             font-family: 'Poppins', sans-serif;
             text-align: center;
             background: linear-gradient(to right, #ff9a9e, #fecfef);
@@ -61,7 +61,7 @@
 </head>
 <body>
     <h1> Birthday Countdown </h1>
-    <p>Time remaining until your next birthday:</p>
+    <p>Time remaining until your birthday:</p>
     <div id="countdown"></div>
     <div id="birthdayMessage"> Happy Birthday! </div>
 
@@ -90,14 +90,20 @@
         }
 
         function updateCountdown() {
-            const birthday = getNextBirthday(5, 27); // Change to your birth month and day
+            const birthday = getNextBirthday(3, 30); // Change to your birth month and day
             const now = new Date();
             const diff = birthday - now;
-
+            
             if (diff <= 0) {
                 document.getElementById("countdown").style.display = "none";
                 document.getElementById("birthdayMessage").style.display = "block";
                 createConfetti();
+                
+                // Hide the birthday message after one day and restart countdown
+                setTimeout(() => {
+                    document.getElementById("birthdayMessage").style.display = "none";
+                    updateCountdown();
+                }, 24 * 60 * 60 * 1000);
                 return;
             }
 
